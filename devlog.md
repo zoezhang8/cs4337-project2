@@ -1,4 +1,4 @@
-Devlog Session 1 - 05/04/3036 10:11PM
+Devlog Session 1 - 05/04/2026 10:11PM
 
 ##Initial thoughts
 Hello, this is my first session working on CS4337 
@@ -36,4 +36,10 @@ exactly one workstation
 - ensure all constraints are satisfied
 
 will probably need helper predicates
+
+
+## 05/04/2026 11:34PM -- start implementation
+started creating schedule.pl, created skeleton 
+for plan/1 to generate Morning,Evening,Night 
+plan. 
 
