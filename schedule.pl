@@ -1,17 +1,8 @@
-%CS 4347 project 2- work schedule planner
-% Zoe Zhang
-% May 2026
-
-% This file implements plan/1 for scheduling 
-employees across shifts and workstations subject 
-to constraints. 
-
-% plan - main predicate that generates a valid 
-schedule
+get_all_employees(Employees) :-
+    findall(E, employee(E), Employees).
 
 plan(plan(Morning, Evening, Night)) :-
-% get all employees
-% get all workstations w their requirements
-% assign empllyees to shifts and workstations
-% verify all constraints
-fail.
+    get_all_employees(AllEmployees),
+    Morning = [workstation(1, AllEmployees)],
+    Evening = [],
+    Night = [].
