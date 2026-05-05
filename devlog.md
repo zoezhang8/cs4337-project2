@@ -1,4 +1,37 @@
-Devlog Session 1 - 05/04/2026 10:11PM
+## 05/05/2026 4:25PM
+(side note, I realized that I put my previous 
+entry before this (05/04 11:34PM at the very 
+bottom of this devlog, under my first devlog 
+session (05/04 10:11PM). scroll down to see that 
+entry!)
+
+yay finally got a simplified but working version 
+of schedule.pl to load. 
+
+what works:
+- 'get_all_employees/1' to colect employees from 
+test-imput.pl
+- 'plan/1' to return a plan with all employees 
+assignemd to workstation 1 on morning shift
+
+what I learned:
+- prolog syntax is very sensitive
+- minimal version helped isolate syntax issues
+
+next steps:
+- add shift assignment to distribute across 
+morning/evening/night
+- add workstation assignment w min/max 
+constraints
+- add constraint checking
+
+files so far:
+- schedule.pl
+- test-input.pl
+- test-input2.pl - began working on a second test 
+option, haven't completed yet
+
+##Devlog Session 1 - 05/04/2026 10:11PM
 
 ##Initial thoughts
 Hello, this is my first session working on CS4337 
