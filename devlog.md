@@ -31,7 +31,8 @@ files so far:
 - test-input2.pl - began working on a second test 
 option, haven't completed yet
 
-##Devlog Session 1 - 05/04/2026 10:11PM
+## 05/04/2026 10:11PM
+FIRST DEVLOG SESSION
 
 ##Initial thoughts
 Hello, this is my first session working on CS4337 
