@@ -1,3 +1,28 @@
+## 05/06/2026 1:17PM
+-implemented assign shifts that distributes 
+employees across morning/evening/night
+- avoid_shift constraints are properly enforced 
+and verified with test-shift-only.pl
+- multiple valid shift assignments pressing ;
+
+test results w shift-only.pl:
+- employee a avoids night
+- employee b avoids evening
+- employee c has no constraints, appears in all 
+shfits
+- found 10+ valid shift distributions
+
+next steps:
+- implement workstation with min/max constraints
+- add avoid_workstation filtering
+- test w example-input1.pl 
+
+files updated:
+- schedule.pl
+- test-shift-only.pl: test for shift constraints
+- test-input1.pl: updated the test file to have 
+the full data given from the assignment
+
 ## 05/05/2026 4:25PM
 (side note, I realized that I put my previous 
 entry before this (05/04 11:34PM at the very 
