@@ -1,4 +1,24 @@
-## 05/06/2026 1:17PM
+## May 8, 2026 3:43PM
+
+Current status: 
+- working schedule.pl with shift 
+assignnment that respects avoid_shift 
+constraints
+- all 26 employees successfully assigned 
+to shifts
+- avoid_shift(daniel, night) works 
+- testing.pl fixed and loading w/o errors
+- no_work(Plan, Worker) returns empty list
+
+limitations so far:
+- still need min/max constraints
+- workstation 1 has min = 2, max = 4 but 
+holds 26 employees
+- workstations 2 and 3 not used yet
+
+
+
+ ## 05/06/2026 1:17PM
 -implemented assign shifts that distributes 
 employees across morning/evening/night
 - avoid_shift constraints are properly enforced 
