@@ -1,3 +1,47 @@
+## May 9, 2026 5:17PM
+status: project complete!
+
+what works:
+- plan/1 returns valid schedules for example inputs 1,3,4,5
+- plan/1 returns false for impossible example 2
+- all employees assigned eactly once
+- no double assignments(double_work false)
+- avoid_shift constraints are respected (daniel not in night shift)
+- avoid_workstation constraints are respected (ophelia not in station 1 or 3)
+- workstation_idle respected (station 3 not used in morning)
+- min/max workstation constraints satisfied
+
+test results from example-input-1.pl:
+?- plan(Plan), no_work(Plan,_).
+false.
+
+?- plan(Plan), double_work(Plan,_).
+false.
+
+?- plan(Plan), works_at(Plan,_,ophelia,1).
+false.
+
+?- plan(Plan), works_at(Plan,_,ophelia,3).
+false.
+
+?- plan(Plan), works_at(Plan,night,daniel,_).
+false.
+
+?- plan(Plan), works_at(Plan,morning,_,3).
+false.
+
+files:
+- schedule.pl
+- devlog.md
+- readme.md
+(- example-inpupt-1-5)
+
+lessons learned:
+- prolog syntax is very sensitive- proper period placement is needed
+- comments can cause syntax errors if not used correctly
+- cut operator and fail can be used to ctrl backtracking
+
+
 ## May 8, 2026 3:43PM
 
 Current status: 
