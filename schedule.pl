@@ -1,3 +1,6 @@
+% Project 2 final implementation
+% Zoe Zhang zqz220000
+
 % Get all employees
 get_all_employees(Employees) :-
     findall(E, employee(E), Employees).
