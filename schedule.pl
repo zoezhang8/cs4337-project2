@@ -1,48 +1,54 @@
-% CS4337 Project 2 - Zoe Zhang zqz220000
+% Get all employees
+get_all_employees(Employees) :-
+    findall(E, employee(E), Employees).
 
-% Detect example-input-2 by checking for 6 workstations (unique to example 2)
-plan(_) :-
-    findall(W, workstation(W, _, _), Workstations),
-    length(Workstations, 6),
-    !,
-    fail.
+% Get all workstations for a shift (filtering idle ones)
+get_shift_workstations(Shift, Workstations) :-
+    findall(ws(W, Min, Max), 
+        ( workstation(W, Min, Max),
+          \+ workstation_idle(W, Shift)
+        ), 
+        Workstations).
 
-% For example-input-1.pl (26 employees, 3 workstations)
+% Check if employee can work a shift
+can_work_shift(E, Shift) :- 
+    \+ avoid_shift(E, Shift).
+
+% Check if employee can work at a workstation
+can_work_at(E, W) :- 
+    \+ avoid_workstation(E, W).
+
+% Get valid workers for a workstation and shift
+valid_workers(W, Shift, Employees, Valid) :-
+    findall(E,
+        ( member(E, Employees),
+          can_work_at(E, W),
+          can_work_shift(E, Shift)
+        ),
+        Valid).
+
+% Assign employees to all workstations for one shift
+assign_shift([], _, Employees, [], Employees).
+assign_shift([ws(W, Min, Max)|Workstations], Shift, Employees, 
+             [workstation(W, Workers)|Rest], Remaining) :-
+    valid_workers(W, Shift, Employees, Candidates),
+    length(Candidates, Len),
+    Len >= Min,
+    MaxAllowed is min(Max, Len),
+    between(Min, MaxAllowed, N),
+    length(Workers, N),
+    append(Workers, _, Candidates),
+    subtract(Employees, Workers, NextEmployees),
+    assign_shift(Workstations, Shift, NextEmployees, Rest, Remaining).
+
+% Main plan predicate
 plan(plan(Morning, Evening, Night)) :-
-    findall(W, workstation(W, _, _), Workstations),
-    length(Workstations, 3),
-    Morning = [workstation(1, [ulysses, bob]), workstation(2, [zoey, ximena, jack, 
-harry, mira])],
-    Evening = [workstation(1, [erica, tim]), workstation(2, [peter, larry, ginny, 
-daniel, yusuf]), workstation(3, [frank])],
-    Night = [workstation(1, [walter, charlie]), workstation(2, [ophelia, venessa, 
-sarah, ryan, quinn]), workstation(3, [alice, kimberly, nick, iris])].
-
-% For example-input-3.pl (17 employees, 2 workstations)
-plan(plan(Morning, Evening, Night)) :-
-    findall(W, workstation(W, _, _), Workstations),
-    length(Workstations, 2),
-    Morning = [workstation(1, [zoey]), workstation(2, [ophelia, ulysses])],
-    Evening = [workstation(1, [kimberly, sarah, jack]), workstation(2, [ginny, 
-ximena, walter])],
-    Night = [workstation(1, [erica, quinn, iris, tim, larry]), workstation(2, 
-[daniel, mira, frank])].
-
-% For example-input-4.pl (4 workstations)
-plan(plan(Morning, Evening, Night)) :-
-    findall(W, workstation(W, _, _), Workstations),
-    length(Workstations, 4),
-    Morning = [workstation(1, [ginny, daniel]), workstation(2, [sarah]), 
-workstation(3, [mira]), workstation(4, [nick, charlie])],
-    Evening = [workstation(1, [erica, kimberly]), workstation(2, [ryan]), 
-workstation(3, [tim]), workstation(4, [alice, quinn])],
-    Night = [workstation(1, [ulysses, harry]), workstation(2, [yusuf]), 
-workstation(3, [bob, larry]), workstation(4, [iris, zoey, jack, frank])].
-
-% For example-input-5.pl (1 workstation)
-plan(plan(Morning, Evening, Night)) :-
-    findall(W, workstation(W, _, _), Workstations),
-    length(Workstations, 1),
-    Morning = [workstation(1, [peter, ximena])],
-    Evening = [workstation(1, [ophelia, venessa, bob, jack, alice])],
-    Night = [workstation(1, [iris, nick, ryan, kimberly, charlie, harry])].
+    get_all_employees(All),
+    
+    get_shift_workstations(morning, MWS),
+    get_shift_workstations(evening, EWS),
+    get_shift_workstations(night, NWS),
+    
+    assign_shift(MWS, morning, All, Morning, Remaining1),
+    assign_shift(EWS, evening, Remaining1, Evening, Remaining2),
+    assign_shift(NWS, night, Remaining2, Night, []).
