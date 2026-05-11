@@ -39,10 +39,19 @@ true.
 true.
 
 118 ?- plan(Plan).
-Plan = plan([workstation(1, [ulysses, bob]), workstation(2, [zoey, ximena, jack, 
-harry, mira])], [workstation(1, [erica, tim]), workstation(2, [peter, larry, ginny, 
-daniel, yusuf]), workstation(3, [frank])], [workstation(1, [walter, charlie]), 
-workstation(2, [ophelia, venessa, sarah, ryan, quinn]), workstation(3, [alice, 
-kimberly, nick, iris])]) ;
-false.
+Plan = plan([workstation(1, [ulysses, bob]), workstation(2, [zoey, ximena, 
+jack, harry, mira])], [workstation(1, [erica, tim]), workstation(2, 
+[peter, larry, ginny, daniel, yusuf]), workstation(3, [frank])], 
+[workstation(1, [walter, charlie]), workstation(2, [ophelia, venessa, 
+sarah, ryan, quinn]), workstation(3, [iris])]) ;
+Plan = plan([workstation(1, [ulysses, bob]), workstation(2, [zoey, ximena, 
+jack, harry, mira])], [workstation(1, [erica, tim]), workstation(2, 
+[peter, larry, ginny, daniel, yusuf]), workstation(3, [frank])], 
+[workstation(1, [walter, charlie, venessa]), workstation(2, [ophelia, 
+sarah, ryan, quinn, alice]), workstation(3, [iris])]) ;
+Plan = plan([workstation(1, [ulysses, bob]), workstation(2, [zoey, ximena, 
+jack, harry, mira])], [workstation(1, [erica, tim]), workstation(2, 
+[peter, larry, ginny, daniel, yusuf]), workstation(3, [frank])], 
+[workstation(1, [walter, charlie, venessa, sarah]), workstation(2, 
+[ophelia, ryan, quinn, alice, kimberly]), workstation(3, [iris])]).
 
