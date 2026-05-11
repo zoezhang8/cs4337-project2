@@ -1,5 +1,43 @@
-## May 9, 2026 5:17PM
-status: project complete!
+## May 10, 2025 10:26PM
+(corrected previous devlog entry (May 9) because I realized my code was 
+actually working improperly
+
+status: debugging and refinement complete -- project complete!
+
+issues encountered and fixed:
+1. avoid_shift not being enforced in workstation assignment
+employees were being scheduled for shifts they should avoid
+the assign_shift predicate wasn't receiving the shift parameter to filter 
+elegible workers
+I added shift parameter to assign_shift and valid_workers to check both 
+avoid_workstation AND avoid_shift to select eligible employees
+
+2. had issues with program hanging on inputs 2 and 3
+problem: infinite loops
+the custom choose/3 predicate was generating too many combinations and 
+caused innefficient backtracking
+fix: I replaced choose/3 with append(Workers, _, Candidates) which selects 
+workers in order from candidates list, improved efficiency
+
+3. removed unsued predicates
+removed filter_idle/3, is_idle/2, can_work_shift/2, can_work_at/2 as 
+separate predicates
+consolidated logic into get_shift_workstations/2
+consolidated worker validation into valid_workers/4 to check both 
+workstation and shift constraints together
+
+what I learned:
+- append/3 can be used to select N elements from a list by pattern 
+matching
+- combining constraints early in findall is more efficient than filter 
+later
+
+files in this project:
+- schedule.pl -- main scheduling  implementation
+- devlog.md -- development log
+- README
+
+## May 9, 2025
 
 what works:
 - plan/1 returns valid schedules for example inputs 1,3,4,5
